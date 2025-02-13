@@ -4,13 +4,27 @@ const expressEjsLayouts = require('express-ejs-layouts')
 const ejs = require('ejs')
 const app = epxress()
 
+const cookieParser = require('cookie-parser')
+const mongoStore = require('connect-mongo')
+
 const connectDB = require('./config/db')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
 connectDB()
 // const test = require('./views/layouts/mai')
 
 app.use(epxress.static('public'))
 app.use(epxress.urlencoded({extended: true}))
 app.use(epxress.json())
+app.use(cookieParser())
+app.use(session({
+    secret: 'keyboard car',
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: process.env.DB_URL
+    })
+}))
 
 //Template Engiene
 app.use(expressEjsLayouts);

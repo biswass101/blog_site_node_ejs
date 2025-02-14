@@ -55,6 +55,10 @@ textarea {
   background-color: var(--red);
 }
 
+.searchBtn {
+  height: 50px;
+  width: 120px;
+}
 
 img {
   width: 100%;
